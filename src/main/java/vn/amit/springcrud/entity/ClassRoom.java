@@ -7,6 +7,15 @@ public class ClassRoom {
     private String name;
     private List<Student> list;
 
+    public ClassRoom() {
+    }
+
+    public ClassRoom(Integer id, String name, List<Student> list) {
+        this.id = id;
+        this.name = name;
+        this.list = list;
+    }
+
     public List<Student> getList() {
         return this.list;
     }

@@ -1,5 +1,6 @@
 package vn.amit.springcrud.api;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,8 @@ public class StudentController {
         }
     }
     @GetMapping("/get-point/{id}")
-    public ResponseEntity<Point> getPoint(@PathVariable("id") Integer id) {
-        Point point = studentService.getPoint(id);
+    public ResponseEntity<List<Point>> getPoint(@PathVariable("id") Integer id) {
+        List<Point> point = studentService.getPoint(id);
 
         if (point!=null) {
             return new ResponseEntity<>(point, HttpStatus.OK);

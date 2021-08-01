@@ -4,7 +4,17 @@ public class Point {
     private Integer id;
     private String subject;
     private Double point;
-    private Student student;
+
+    public Point() {
+    }
+    
+
+    public Point(Integer id, String subject, Double point) {
+        this.id = id;
+        this.subject = subject;
+        this.point = point;       
+    }
+
     public Integer getId() {
         return this.id;
     }
@@ -27,13 +37,5 @@ public class Point {
 
     public void setPoint(Double point) {
         this.point = point;
-    }
-
-    public Student getStudent() {
-        return this.student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 }

@@ -1,9 +1,24 @@
 package vn.amit.springcrud.entity;
 
+import java.util.List;
+
 public class Student {
     private Integer id;
     private String fullName;
     private String studentCode;
+    private List<Point> points;
+    private ClassRoom classRoom; 
+
+    public Student() {
+    }
+
+    public Student(Integer id, String fullName, String studentCode, List<Point> points, ClassRoom classRoom) {
+        this.id = id;
+        this.fullName = fullName;
+        this.studentCode = studentCode;
+        this.points = points;
+        this.classRoom = classRoom;
+    }
 
     public Integer getId() {
         return this.id;
@@ -36,5 +51,13 @@ public class Student {
     public void setClassRoom(ClassRoom classRoom) {
         this.classRoom = classRoom;
     }
-    private ClassRoom classRoom; 
+
+    public List<Point> getPoints() {
+        return this.points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+    
 }
