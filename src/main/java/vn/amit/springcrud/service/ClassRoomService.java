@@ -18,4 +18,5 @@ public interface ClassRoomService {
     List<Student> findStudentByClass(Integer id);
     Double getTotalPoint(Integer id);
     ClassRoom findById(Integer id);
+    List<ClassRoom> search(Integer id, String name, String studentName);
 }

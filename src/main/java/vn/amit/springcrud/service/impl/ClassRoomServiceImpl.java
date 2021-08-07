@@ -63,5 +63,10 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     public ClassRoom findById(Integer id) {
         return classRoomRepository.findById(id).get();
     }
+
+    @Override
+    public List<ClassRoom> search(Integer id, String name, String studentName) {
+        return classRoomRepository.search(id, name, studentName);
+    }
     
 }

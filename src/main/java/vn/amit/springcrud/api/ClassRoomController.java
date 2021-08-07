@@ -46,8 +46,8 @@ public class ClassRoomController {
         return ResponseEntity.ok().body(new BaseResponse<>(classRoomService.findById(id)));
     }
     @GetMapping("/search")
-    public ResponseEntity<BaseResponse<ClassRoom>> getByName(@PathVariable("name") String name) {
-        return ResponseEntity.ok().body(new BaseResponse<>(classRoomService.findByName(name)));
+    public ResponseEntity<BaseResponse<List<ClassRoom>>> getByName(@PathVariable("name") String name,@PathVariable("studentName") String studentName,@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(new BaseResponse<>(classRoomService.search(id, name, studentName)));
     }
 
     @PostMapping("/add")

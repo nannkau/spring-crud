@@ -14,5 +14,4 @@ public interface ClassRoomRepository extends JpaRepository<ClassRoom,Integer>,Cl
     ClassRoom findByName(String name);
     @Query("select s from ClassRoom cr join cr.students s where cr.id =:id")
     List<Student> findStudent(@Param("id") Integer id);
-    Double getScoreTotal(Integer classRoomId);
 }
