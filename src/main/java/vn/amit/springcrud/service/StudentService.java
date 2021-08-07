@@ -1,19 +1,20 @@
 package vn.amit.springcrud.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import vn.amit.springcrud.entity.Point;
+import vn.amit.springcrud.entity.Scores;
 import vn.amit.springcrud.entity.Student;
+import vn.amit.springcrud.model.request.AddStudentRequest;
+import vn.amit.springcrud.model.request.UpdateStudentRequest;
 
 
 
 public interface StudentService {
-    Optional<Student> getDetail(Integer id);
-    List<Point> getPoint(Integer id);
-    Student save(Student student);
-    Optional<Student> update(Student student);
-    Optional<Student> findByName(String name);
-    Optional<Student> findById(Integer id);
+    Student getDetail(Integer id);
+    List<Scores> getPoint(Integer id);
+    Student save(AddStudentRequest student);
+    Student update(UpdateStudentRequest student);
+    Student findByName(String name);
+    Student findById(Integer id);
     void deleteById(Integer id);
 }

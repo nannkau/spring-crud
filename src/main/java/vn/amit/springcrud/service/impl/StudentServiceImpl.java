@@ -1,61 +1,65 @@
 package vn.amit.springcrud.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import vn.amit.springcrud.data.StudentData;
-import vn.amit.springcrud.entity.Point;
+import vn.amit.springcrud.entity.Scores;
 import vn.amit.springcrud.entity.Student;
+import vn.amit.springcrud.model.request.AddStudentRequest;
+import vn.amit.springcrud.model.request.UpdateStudentRequest;
+import vn.amit.springcrud.repository.ScoresRepository;
+import vn.amit.springcrud.repository.StudentRepository;
 import vn.amit.springcrud.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService{
-
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private ScoresRepository scoresRepository;
     @Override
-    public Optional<Student> getDetail(Integer id) {
-        Optional<Student> student=StudentData.students.stream().filter(s->id==s.getId()).findFirst();
-        return student;
+    public Student getDetail(Integer id) {
+        return studentRepository.findById(id).get();
     }
 
     @Override
-    public List<Point> getPoint(Integer id) {
-        Optional<Student> student=StudentData.students.stream().filter(s->id==s.getId()).findFirst();
-        return student.get().getPoints();
+    public List<Scores> getPoint(Integer id) {
+        return scoresRepository.findByStudent_Id(id);
     }
 
-    
+   
 
     @Override
-    public Optional<Student> update(Student student) {
-        StudentData.students.stream().filter(s->student.getId()==s.getId()).forEach(s->s=student);
-        Optional<Student> optional=StudentData.students.stream().filter(s->student.getId()==s.getId()).findFirst();
-        return optional;
+    public Student findByName(String name) {
+        return studentRepository.findByFullName(name);
     }
 
     @Override
-    public Optional<Student> findByName(String name) {
-        Optional<Student> student=StudentData.students.stream().filter(s->name.equals(s.getFullName())).findFirst();
-        return student;
-    }
-
-    @Override
-    public Optional<Student> findById(Integer id) {
-        Optional<Student> student=StudentData.students.stream().filter(s->id==s.getId()).findFirst();
-        return student;
-    }
-
-    @Override
-    public Student save(Student student) {
-        StudentData.students.add(student);
-        Optional<Student> optional=StudentData.students.stream().filter(s->student.getId()==s.getId()).findFirst();
-        return optional.get();
+    public Student findById(Integer id) {
+        return studentRepository.findById(id).get();
     }
 
     @Override
     public void deleteById(Integer id) {
-        Optional<Student> student=StudentData.students.stream().filter(s->id==s.getId()).findFirst();
-        StudentData.students.remove(student.get());
+        studentRepository.deleteById(id);
+        
+    }
+
+    @Override
+    public Student save(AddStudentRequest student) {
+        return studentRepository.save(new ModelMapper().map(student, Student.class));
+    }
+
+    @Override
+    public Student update(UpdateStudentRequest student) {
+        Student entity= studentRepository.findById(student.getId()).get();
+        if(entity!=null){
+            entity.setFullName(student.getFullName());
+            entity.setStudentCode(student.getStudentCode());
+        }
+        return studentRepository.save(entity);
     }
 
     

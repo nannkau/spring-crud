@@ -1,23 +1,25 @@
 package vn.amit.springcrud.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
+
 @Data
 @Entity
-public class ClassRoom {
+public class Scores {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "class_room_id")
+    @Column(name = "score_id")
     private Integer id;
-    private String name;
-    @OneToMany(mappedBy = "classRoom")
-    private List<Student> students;
+    private String subject;
+    private Double scoreValue;
+    @ManyToOne()
+    @JoinColumn(name = "student_id",referencedColumnName = "student_id")
+    private Student student;
 }
